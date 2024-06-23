@@ -1,0 +1,27 @@
+# Compiled files
+bin/
+obj/
+
+# VS Code files
+.vscode/
+
+# User-specific files
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Logs
+*.log
+
+# NUGET
+*.nupkg
+*.snupkg
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Rider
+.idea/
