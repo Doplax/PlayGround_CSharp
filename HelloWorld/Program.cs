@@ -10,6 +10,8 @@ namespace HelloWorld
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Commit Test in Windows Project");
+
         }
     }
 }
