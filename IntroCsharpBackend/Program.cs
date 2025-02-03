@@ -1,2 +1,29 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿//Sale sale = new Sale(); // Podemos crear el objeto asi
+//Sale sale = new(); //  Así
+var sale = new Sale(5); // O con var
+
+sale.Total = 5; // Si en el contructor quitaramos el set, No podriamos asignarle ningún valor.
+
+
+var message = sale.GetInfo();
+Console.WriteLine(message); // Imprimimos el valor
+
+class Sale
+{  
+    public decimal Total { get; set; } // Las popiedades se escriben con mayuscla por convención
+    private decimal _some; // Se le pone _ a las propiedades privadas
+    protected decimal _someProtected; // Con protected se puede acceder a la propiedad desde una clase hija
+    public Sale(decimal total)
+    {
+        Total = total;
+        _some = 8; // Solo se puede acceder a una propiedad privada dentro de la clase
+    }
+
+    public string GetInfo()
+    {
+        return "El toatal es: " + Total;
+        //return $"Total: {Total}";
+    }
+}
+
+
