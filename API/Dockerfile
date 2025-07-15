@@ -3,17 +3,16 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
 # Copy csproj and restore
-COPY *.sln .
-COPY API/*.csproj ./API/
+COPY ../*.sln .                        
+COPY *.csproj ./                      
 RUN dotnet restore
 
-# Copy the rest of the files and build
-COPY . .
-WORKDIR /app/API
+# Copy the rest and build
+COPY . .                              
 RUN dotnet publish -c Release -o out
 
-# Build runtime image
+# Runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
-COPY --from=build /app/API/out ./   
-ENTRYPOINT ["dotnet", "API.dll"]    
+COPY --from=build /app/out ./
+ENTRYPOINT ["dotnet", "API.dll"]
