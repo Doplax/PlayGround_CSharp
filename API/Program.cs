@@ -1,9 +1,24 @@
 ﻿using API.Extensions;
 using System.Diagnostics;
+using DotNetEnv;
+using API.Config;
+
+Env.Load();
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+
+// MONGO
+var mongoSettings = new MongoDbSettings
+{
+    ConnectionString = Environment.GetEnvironmentVariable("MONGO_CONN_STRING")!,
+    DatabaseName = Environment.GetEnvironmentVariable("MONGO_DB_NAME")!
+};
+
+builder.Services.AddSingleton(mongoSettings);
+builder.Services.AddSingleton<MongoDbContext>();
+
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -25,8 +40,11 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-app.MapGet("/", () => "✅ API en marcha 🚀");  // <-- Esto responde en la raíz "/"
+app.MapGet("/", () => "✅ API en marcha 🚀");  
 
 app.MapControllers();
+
+// COMPROBATION
+var dbContext = app.Services.GetRequiredService<MongoDbContext>();
 
 app.Run();
