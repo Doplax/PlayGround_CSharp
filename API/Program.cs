@@ -2,6 +2,8 @@
 using System.Diagnostics;
 using DotNetEnv;
 using API.Config;
+using API.Utils;
+using Microsoft.Extensions.Logging;
 
 Env.Load();
 
